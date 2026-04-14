@@ -1,7 +1,9 @@
 /* This is C version of performing AES intrinsics using AES-NI
-	this version is very simple and fast due to intrinsics, runs once but will be called 10000 times for benchmarking. 
+	this version is very simple and fast due to intrinsics, runs  10000 times for benchmarking. 
 	Will be compiled with -O3 flag to compare against my pure hand tuned assembly version (aesdqw128.asm : aes dq:doublequadword(128bits))
-	Spoilers : (Assembly version wins by margin of 4-5 less clock cycles) 
+	Output = Average clock cycle count per encryption-decryption cycle
+	Spoilers : (Assembly version wins by margin of 4-5 less clock cycles). 
+	
 	:)
 */
 #include <stdio.h>
@@ -75,6 +77,9 @@ int main() {
 	 aes128_key_expansion(key, roundkeys);
     uint64_t start=0,end=0;
 //serializes and reads timestamp , lfence for simple serializablity
+int cnt=0;
+int total=0;
+strt:
 asm volatile(
     "lfence\n\t"
     "rdtsc\n\t"
@@ -96,9 +101,13 @@ asm volatile(
     :
     : "%rcx", "%rdx"
 );
-
 uint64_t cycles = end - start;
-printf("%lu\n", cycles);  
+total+=cycles;
+cycles=0;
+cnt+=1;
+if(cnt<10000)goto strt;
+
+printf("%lu\n", cycles=total/10000);  
     return 0;
 
     }
