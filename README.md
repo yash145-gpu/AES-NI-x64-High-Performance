@@ -32,8 +32,8 @@
 #
  - block size : 16 Bytes (Single)
  - Average AES encryption: 10-11 clock cycles
- - Average AES decryption: 10-11 clock cycles
+ - Average AES decryption: 11-14 clock cycles
 #
 - block size : 16 Bytesx4 (Concurrent)
 - Average AES encryption: 1-2 clock cycles
-- Average AES decryption: 1-2 clock cycles
+- Average AES decryption: 2-3 clock cycles
