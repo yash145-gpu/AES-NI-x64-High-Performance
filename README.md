@@ -1,7 +1,18 @@
- # Highly Optimized Low Latency Hardware AES128ECB Implementation and Benchmarking
- - Pure x86_64 Intel Assembly without any external library 
- - CPU: Intel Skylake   AVX2, AES-NI
-##
+ <h2>Highly Optimized Low Latency AES128ECB Implementation and Benchmarking</h2>
+ 
+ ### Pure x86_64 Intel Assembly without any external library 
+ ### CPU: Intel Skylake   AVX2, AES-NI
+<h2></h2>
+</b>
+
+- #### Loops unrolled for better instruction scheduling/Pipeline hits.
+- #### 22 keys : stored in 15 vector registers (11 Encryption , 4 Decryption) , 7 Decryption keys in memory.
+- #### Cache prefetching for memory keys (1-2 clk cycle access time).
+- #### 16 Byte memory alignment for Plaintext & Keys for fast fetching.
+- #### 10000 Benchmark iterations for stable low variance results.
+</b>
+<h2></h2>
+
 - ``Assemble : nasm -felf64 -o aex.o aesdqw.asm``
 - ``link     : ld -o aex aex.o``
 - ``execute  : ./aex``
