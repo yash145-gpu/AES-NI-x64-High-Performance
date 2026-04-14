@@ -107,7 +107,7 @@ cycles=0;
 cnt+=1;
 if(cnt<10000)goto strt;
 
-printf("%lu\n", cycles=total/10000);  
+printf("\nAES C -> %lu\n", cycles=total/10000);  
     return 0;
 
     }
