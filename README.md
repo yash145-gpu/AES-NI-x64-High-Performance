@@ -13,10 +13,16 @@
 </b>
 <h2></h2>
 
+### For Assembly code execution
 - ``Assemble : nasm -felf64 -o aex.o aesdqw.asm``
-- ``link     : ld -o aex aex.o``
-- ``execute  : ./aex``
+- ``Link     : ld -o aex aex.o``
+- ``Execute  : ./aex``
 
+## Make : 
+-***Benchmarking with AESC***
+- Build : ``make``
+- Execute : ``make run``
+  
 ##
 - Input : File : 16 bytes plain text 'plainVector128'
 - Output: File : 16 bytes cipher text in file 'encop'
