@@ -1,15 +1,15 @@
+/* This is C version of performing AES intrinsics using AES-NI
+	this version is very simple and fast due to intrinsics, runs once but will be called 10000 times for benchmarking. 
+	Will be compiled with -O3 flag to compare against my pure hand tuned assembly version (aesdqw128.asm : aes dq:doublequadword(128bits))
+	Spoilers : (Assembly version wins by margin of 4-5 less clock cycles) 
+	:)
+*/
 #include <stdio.h>
 #include <stdint.h>
 #include <wmmintrin.h>
 #include <x86intrin.h>
 #include <string.h>
 
-// --- Print 16-byte buffer in hex ---
-/*void print_hex(uint8_t *buf, int len) {
-    for (int i = 0; i < len; i++)
-        printf("%02X ", buf[i]);
-    printf("\n");
-}*/
 
 #define AES128_KEY_EXPAND_STEP(prev, next, RCON) do { \
     __m128i tmp1 = (prev); \
@@ -64,7 +64,7 @@ int main() {
     
     uint8_t ciphertext[16];
     uint8_t decrypted[16+1];
-    decrypted[16] = 0; // null terminator
+    decrypted[16] = 0; 
 
     uint8_t key[16] = {0x2b,0x7e,0x15,0x16,0x28,0xae,0xd2,0xa6,
                                0xab,0xf7,0x97,0x75,0x46,0x7a,0x03,0x55};
@@ -74,7 +74,7 @@ int main() {
 
 	 aes128_key_expansion(key, roundkeys);
     uint64_t start=0,end=0;
-
+//serializes and reads timestamp , lfence for simple serializablity
 asm volatile(
     "lfence\n\t"
     "rdtsc\n\t"
