@@ -7,7 +7,7 @@
 
 - #### Loops unrolled for better instruction scheduling/Pipeline hits.
 - #### 22 keys : stored in 15 vector registers (11 Encryption , 4 Decryption) , 7 Decryption keys in memory.
-- #### Cache prefetching for memory keys (1-2 clk cycle access time).
+- #### Cache prefetching for memory keys (3-4 clk cycle access time).
 - #### 16 Byte memory alignment for Plaintext & Keys for fast fetching.
 - #### 10000 Benchmark iterations for stable low variance results.
 </b>
